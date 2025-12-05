@@ -1,0 +1,280 @@
+/*
+ * Timeline Histórica - Stylesheet v1.6.3 (Ajuste final para móviles)
+ * Diseño con separación de interacciones para desktop y móvil.
+ */
+
+/* --- 1. VARIABLES Y FUENTES --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --brx-primary: #d93a3a;
+    --brx-dark: #2c3e50;
+    --brx-light: #ffffff;
+    --brx-line-thickness: 4px;
+    --brx-point-size: 16px;
+    --brx-point-border: 3px;
+}
+
+/* --- 2. ESTILOS BASE (Común para Móvil y Desktop) --- */
+#mi-linea-de-tiempo-unica {
+    font-family: 'Poppins', sans-serif;
+    color: var(--brx-dark);
+    max-width: 1200px;
+    margin: 60px auto;
+    position: relative;
+}
+
+#mi-linea-de-tiempo-unica .brx-timeline-line {
+    background-color: var(--brx-primary) !important;
+}
+
+.brx-timeline-events-wrapper {
+    display: flex;
+}
+
+.brx-timeline-event {
+    position: relative;
+    display: flex;
+}
+
+.brx-timeline-axis-point {
+    background-color: var(--brx-light);
+    border: var(--brx-point-border) solid var(--brx-primary);
+    border-radius: 50%;
+    width: var(--brx-point-size);
+    height: var(--brx-point-size);
+    z-index: 5;
+}
+
+.brx-timeline-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.brx-timeline-marker {
+    display: flex;
+    align-items: center;
+    cursor: default; /* Default cursor for mobile */
+}
+
+.brx-timeline-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.brx-timeline-year {
+    font-weight: 700;
+    color: var(--brx-dark);
+}
+
+.brx-timeline-description {
+    background: var(--brx-light);
+}
+
+.brx-timeline-description h3 { 
+    margin: 0 0 10px 0; 
+    font-size: 1rem; 
+    font-weight: 700; 
+    color: var(--brx-primary); 
+}
+.brx-timeline-description div p:first-child { margin-top: 0; }
+.brx-timeline-description div p:last-child { margin-bottom: 0; }
+
+/* --- 3. DISEÑO RESPONSIVE (MÓVIL PRIMERO) --- */
+@media (max-width: 1024px) {
+    #mi-linea-de-tiempo-unica {
+        margin: 30px auto;
+        padding-top: 30px;
+    }
+
+    .brx-timeline-line {
+        position: absolute;
+        left: 25px;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        height: 100%;
+    }
+
+    .brx-timeline-events-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .brx-timeline-event {
+        flex-direction: row;
+        width: 100%;
+        align-items: flex-start;
+        padding-left: 25px;
+        margin: 30px 0;
+        box-sizing: border-box;
+        overflow: hidden; 
+    }
+
+    .brx-timeline-axis-point {
+        position: absolute;
+        top: 35px !important;
+        left: 12px !important;
+        transform: translateX(calc(-50% - var(--brx-point-border) / 2));
+    }
+
+    .brx-timeline-content {
+        margin-left: 20px;
+        text-align: left;
+        width: 100%;
+        align-items: flex-start;
+    }
+    
+    .brx-timeline-marker {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .brx-timeline-icon {
+        margin-top: 8px;
+        margin-bottom: 15px;
+    }
+    
+    .brx-timeline-year {
+        display:none;
+        font-size: 1.3rem;
+    }
+
+    .brx-timeline-description {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: 10px 0 0 0;
+        width: 100%;
+        background: transparent;
+        border-radius: 0;
+        margin-top: 5px;
+        text-align: left;
+    }
+
+    .brx-timeline-description::after {
+        display: none;
+    }
+
+    /* ======================================================= */
+    /* == OCULTAR TÍTULO REDUNDANTE (H3) EN MÓVIL           == */
+    /* ======================================================= */
+    .brx-timeline-description h3 {
+        display: none;
+    }
+}
+
+/* --- 4. DISEÑO DESKTOP (PANTALLA ANCHA) --- */
+@media (min-width: 1025px) {
+    #mi-linea-de-tiempo-unica {
+        padding-top: 150px;
+    }
+    
+    .brx-timeline-line {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: var(--brx-line-thickness);
+    }
+    
+    .brx-timeline-events-wrapper {
+        justify-content: space-around;
+        align-items: flex-end;
+    }
+
+    .brx-timeline-event {
+        width: 200px;
+        justify-content: center;
+        padding-bottom: calc(var(--brx-point-size) / 2);
+    }
+
+    .brx-timeline-axis-point {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 50%);
+    }
+
+    .brx-timeline-content {
+        align-items: center;
+    }
+    
+    .brx-timeline-marker {
+        flex-direction: column-reverse;
+    }
+
+    .brx-timeline-icon {
+        margin-top: 8px;
+        margin-bottom: 15px;
+    }
+
+    .brx-timeline-year {
+        font-size: 1.5rem;
+    }
+
+    .brx-timeline-description {
+        position: absolute;
+        left: 50%;
+        bottom: 100%;
+        margin-bottom: 15px;
+        width: 380px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        text-align: center;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 20;
+        transform: translate(-50%, 10px);
+        transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+    }
+    
+    .brx-timeline-description::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        border-style: solid;
+        top: 100%;
+        border-width: 10px 10px 0 10px;
+        border-color: var(--brx-light) transparent transparent transparent;
+    }
+}
+
+/* --- 5. INTERACCIONES (SOLO PARA DISPOSITIVOS CON HOVER COMO UN PC) --- */
+@media (min-width: 1025px) and (hover: hover) {
+    .brx-timeline-marker {
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    
+    .brx-timeline-event:hover .brx-timeline-marker {
+        transform: scale(1.1);
+    }
+
+    /* Por defecto, el evento activo es visible */
+    .brx-timeline-event.evento-activo .brx-timeline-description {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%);
+    }
+
+    /* Al hacer hover en el contenedor, se oculta el activo */
+    .brx-timeline-events-wrapper:hover .brx-timeline-event.evento-activo .brx-timeline-description {
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(-50%, 10px);
+    }
+
+    /* Y se muestra el que está bajo el cursor */
+    .brx-timeline-event:hover .brx-timeline-description {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%);
+    }
+}

@@ -1,0 +1,157 @@
+/**
+ * Estilos para el Plugin de Tarjetas Interactivas B-CARD
+ * Version: 2.1 (Modificada)
+ */
+
+.bcard-container {
+    display: flex;
+    width: 100%;
+    max-width: 1100px;
+    /* CAMBIO 1: Altura reducida para que las tarjetas sean menos altas */
+    min-height: 380px;
+    gap: 15px;
+    margin: 40px auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+
+.bcard {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    color: white;
+    background-position: center;
+    background-size: cover;
+    transition: flex 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11);
+}
+
+@media (max-width: 450px) {
+  .bcard-body p {
+    display: none;
+  }
+}
+
+
+.bcard-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+    transition: background-color 0.5s ease;
+}
+
+.bcard-content {
+    position: relative;
+    height: 100%;
+    padding: 24px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    /* CAMBIO 2: Contenido centrado verticalmente para eliminar el espacio vacío */
+    justify-content: left;
+    text-align: left; /* Centramos el texto para que el título se vea mejor */
+}
+
+/* --- ESTADO CERRADO --- */
+.bcard--cerrada { flex: 1; }
+.bcard--abierta { flex: 2; }
+
+.bcard-header-static h2 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 10px 0;
+}
+
+.bcard-btn-static {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50px;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: white;
+    backdrop-filter: blur(8px);
+    transition: background-color 0.3s ease;
+    margin: 0 auto; /* Para centrar el botón en las tarjetas compactas */
+}
+.bcard-btn-static:hover { background-color: rgba(255, 255, 255, 0.3); }
+.bcard-btn-static .bcard-btn-icon { margin-right: 8px; font-size: 1.2rem; }
+.bcard-btn-static .bcard-btn-text { font-size: 0.9rem; font-weight: 500; }
+
+/* --- ESTADO ABIERTO (HOVER) --- */
+.bcard-container:hover .bcard--abierta { flex: 1; }
+.bcard-container:hover .bcard:hover { flex: 4; }
+
+.bcard:hover .bcard-overlay {
+    background-color: rgba(200, 40, 40, 0.75);
+}
+
+.bcard--abierta .bcard-body {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    /* Evitamos que el cuerpo ocupe espacio cuando está oculto */
+    max-height: 0;
+}
+
+.bcard--abierta:hover .bcard-body {
+    opacity: 1;
+    max-height: 200px; /* Altura máxima que puede alcanzar el cuerpo al aparecer */
+}
+
+.bcard--abierta .bcard-header {
+    width: 100%; /* Ocupa todo el ancho */
+    position: relative; /* Lo dejamos en el flujo normal */
+    display: flex;
+    /* Centramos el título horizontalmente */
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.6s ease;
+}
+
+/* CAMBIO 3: Ocultamos el icono de la flecha/círculo */
+.bcard-arrow-icon {
+    display: none;
+}
+
+.bcard-header h2 {
+    font-size: 2.8rem; /* Título un poco más grande para ser más imponente */
+    line-height: 1.1;
+    margin: 0;
+}
+.bcard-body {
+    margin-top: 15px; /* Espacio entre el título y el texto al expandir */
+}
+.bcard-body p { margin: 0 0 24px 0; line-height: 1.6; text-align: justify !important;}
+.bcard-btn {
+    display: inline-flex; align-items: center; background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 50px;
+    padding: 8px 16px; text-decoration: none; color: white; backdrop-filter: blur(8px);
+    margin: 0 auto; /* Centramos el botón */
+}
+.bcard-btn:hover { background-color: rgba(255, 255, 255, 0.3); }
+.bcard-btn-icon { margin-right: 8px; }
+.bcard-btn-text { font-size: 1.5rem; font-weight: 700; }
+
+/* --- RESPONSIVIDAD PARA MÓVILES --- */
+@media (max-width: 768px) {
+    .bcard-container {
+        flex-direction: column;
+        height: auto;
+        gap: 10px;
+    }
+    .bcard,
+    .bcard-container:hover .bcard--abierta,
+    .bcard-container:hover .bcard:hover {
+        flex: 1 1 280px;
+    }
+    .bcard--abierta .bcard-body {
+        opacity: 1;
+        max-height: 200px;
+    }
+    .bcard--abierta:hover .bcard-overlay {
+        background-color: rgba(0, 0, 0, 0.45);
+    }
+    .bcard-header h2 { font-size: 2.2rem; }
+}
