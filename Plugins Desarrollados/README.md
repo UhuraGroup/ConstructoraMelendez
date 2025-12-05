@@ -73,9 +73,3 @@ Para garantizar el funcionamiento correcto de todos los módulos:
   * **WordPress:** Versión 5.8 o superior.
   * **PHP:** Versión 7.4 o superior (Compatible con PHP 8.x).
   * **Advanced Custom Fields (ACF):** Requerido únicamente para el *Cotizador* y el *Comparador*.
-
------
-
-## 🤝 Soporte
-
-Si necesitas realizar ajustes a la lógica matemática del cotizador o modificar los estilos corporativos (colores de marca), por favor consulta la sección **"Guía de Edición"** dentro del README de cada plugin antes de modificar el código fuente.
